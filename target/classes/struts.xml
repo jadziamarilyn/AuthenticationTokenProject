@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <package name="default" extends="json-default" >
+        <interceptors>
+            <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
+            <interceptor name = "myinterceptor"
+                         class = "com.facilio.struts.InterceptorClass" />
+        </interceptors>
+        <action name="RegisterData" class="com.facilio.struts.RegisterData" method="registration">
+            <interceptor-ref name="json" />
+            <result name="success" type="json">
+                <param name="includeProperties">status</param>
+            </result>
+        </action>
+        <action name="UserLogin" class="com.facilio.struts.RegisterData" method="login">
+            <interceptor-ref name="json" />
+            <result name="success" type="json">
+<!--                <param name="includeProperties"></param>-->
+                <param name="includeProperties">token,status</param>
+            </result>
+            <result name="error" type="json"><param name="includeProperties">status</param></result>
+        </action>
+        <action name="CreateContact" class="com.facilio.struts.RegisterData" method="CreateContact">
+            <interceptor-ref name="json" />
+            <interceptor-ref name = "myinterceptor" />
+            <result name="success" type="json">
+                <param name="includeProperties">status</param>
+            </result>
+            <result name="error" type="json"><param name="includeProperties">status</param></result>
+        </action>
+        <action name="UpdateContact" class="com.facilio.struts.RegisterData" method="UpdateContact">
+            <interceptor-ref name="json" />
+            <interceptor-ref name = "myinterceptor" />
+            <result name="updated" type="json">
+                <param name="includeProperties">status</param>
+            </result>
+            <result name="error" type="json"><param name="includeProperties">status</param></result>
+        </action>
+        <action name="DeleteContact" class="com.facilio.struts.RegisterData" method="DeleteContact">
+            <interceptor-ref name="json" />
+            <interceptor-ref name = "myinterceptor" />
+            <result name="delete" type="json">
+                <param name="includeProperties">status</param>
+            </result>
+            <result name="error" type="json"><param name="includeProperties">status</param></result>
+        </action>
+        <action name="ListContact" class="com.facilio.struts.RegisterData" method="ListContact">
+            <interceptor-ref name="json" />
+            <interceptor-ref name = "myinterceptor" />
+            <result name="done" type="json">
+                <param name="root">lst</param>
+            </result>
+            <result name="error" type="json"><param name="includeProperties">status</param></result>
+        </action>
+    </package>
+    <!--    <package name="default" extends="json-default" >-->
+    <!--        <interceptors>-->
+    <!--            <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>-->
+    <!--        </interceptors>-->
+    <!--       -->
+    <!--    </package>-->
+</struts>
